@@ -1,0 +1,17 @@
+.note {
+    padding: 5px;
+    border: 1px solid rgba(85, 85, 85, 0.26);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    .title {
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: 0.7px;
+    }
+    .description {
+        display: -webkit-box;
+        -webkit-line-clamp: 1; // количество строк
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}

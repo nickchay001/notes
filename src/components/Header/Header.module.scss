@@ -3,4 +3,10 @@
     min-height: 50px;
     border-radius: 5px;
     padding: 10px;
+    display: flex;
+}
+.buttons{
+    border: 1px solid rgba(85, 85, 85, 0.26);
+    display: flex;
+    column-gap: 3px;
 }
