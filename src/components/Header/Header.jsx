@@ -4,12 +4,12 @@ import ButtonDelete from "../Buttons/ButtonDelete/ButtonDelete"
 import ButtonEdit from "../Buttons/ButtonEdit/ButtonEdit"
 import ButtonAdd from "../Buttons/ButtonAdd/ButtonAdd"
 
-const Header = (props) => {
+const Header = () => {
     return (
         <header className={styles.header}>
             <div className={styles.buttons}>
                 <ButtonAdd />
-                <ButtonDelete noteFocuseId={props.noteFocuseId} deleteNote={props.deleteNote}/>
+                <ButtonDelete/>
                 <ButtonEdit />
             </div>
         </header>

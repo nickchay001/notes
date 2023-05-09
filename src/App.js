@@ -2,14 +2,18 @@ import Header from './components/Header/Header';
 import SideBar from './components/SideBar/SideBar';
 import styles from './App.module.scss'
 import NoteInfo from './components/NoteInfo/NoteInfo';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+
+export const AppContext = React.createContext();
+
 
 function App() {
   const [notes, setNotes] = useState([
     {
       id: 1,
       title: 'first note',
-      description: 'qownjqwnm nqw noqnfnwqeif nqnwf nqefnio poqjfp ojmqopfj po'
+      description: 'qownjqwnm nqw noqnfnwqeigggggggggggggggf nqnwf nqefnio poqjfp ojmqopfj po'
     },
     {
       id: 2,
@@ -35,19 +39,18 @@ function App() {
     setFullFocuseNote(fullFocuseNote = notes.find(n => n.id === noteFocuseId))
   }, [noteFocuseId, notes])
     
-
-  
-
+  const [addMode, setAddMode] = useState(false)
 
 
   return (
     <div className={styles.wrapper}>
-      <Header deleteNote={deleteNote} noteFocuseId={noteFocuseId} />
+      <AppContext.Provider value={{setNotes,deleteNote,setNoteFocuseId,noteFocuseId,setAddMode,notes}}>
+      <Header/>
       <main className={styles.main}>
-        <SideBar setNoteFocuseId={setNoteFocuseId} notes={notes}
-          setNotes={setNotes} />
-        <NoteInfo fullFocuseNote={fullFocuseNote} />
+        <SideBar notes={notes}/>
+        <NoteInfo fullFocuseNote={fullFocuseNote} addMode={addMode} />
       </main>
+      </AppContext.Provider>
     </div>
   );
 }
