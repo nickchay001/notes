@@ -13,7 +13,7 @@ function App() {
     {
       id: 1,
       title: 'first note',
-      description: 'qownjqwnm nqw noqnfnwqeigggggggggggggggf nqnwf nqefnio poqjfp ojmqopfj po'
+      description: 'Не записывать задачу с пустыми инпутами'
     },
     {
       id: 2,
@@ -33,22 +33,28 @@ function App() {
     setNotes([...notes].filter(n => n.id !== id));
   };
 
+  const [editMode, setEditMode ] = useState(false)
+
+
   let [fullFocuseNote, setFullFocuseNote] = useState()
 
   useEffect(() => {
     setFullFocuseNote(fullFocuseNote = notes.find(n => n.id === noteFocuseId))
   }, [noteFocuseId, notes])
     
+
+
   const [addMode, setAddMode] = useState(false)
+
 
 
   return (
     <div className={styles.wrapper}>
-      <AppContext.Provider value={{setNotes,deleteNote,setNoteFocuseId,noteFocuseId,setAddMode,notes}}>
+      <AppContext.Provider value={{fullFocuseNote,setEditMode,setNotes,deleteNote,setNoteFocuseId,noteFocuseId,setAddMode,notes,editMode}}>
       <Header/>
       <main className={styles.main}>
         <SideBar notes={notes}/>
-        <NoteInfo fullFocuseNote={fullFocuseNote} addMode={addMode} />
+        <NoteInfo fullFocuseNote={fullFocuseNote} addMode={addMode} editMode={editMode} />
       </main>
       </AppContext.Provider>
     </div>

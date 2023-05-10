@@ -5,9 +5,9 @@ import styles from './AddNote.module.scss'
 
 
 const AddNote = () => {
-    const [titleValue, setTitleValue] = useState('')
-    const [descriptionValue, setDescriptionValue] = useState('')
-    const { setNotes, notes } = React.useContext(AppContext)
+    let [titleValue, setTitleValue] = useState('')
+    let [descriptionValue, setDescriptionValue] = useState('')
+    const { setNotes, notes, editMode, fullFocuseNote } = React.useContext(AppContext)
     const v4Id = uuidv4()
     function saveNote() {
         setNotes(
@@ -19,20 +19,23 @@ const AddNote = () => {
             setTitleValue(''),
             setDescriptionValue('')
         )
-        console.log(v4Id)
+    }
+    if (editMode) {
+        setTitleValue(fullFocuseNote.title)
+        setDescriptionValue(fullFocuseNote.description)
+    } else {
+        return (
+            <div className={styles.addForm}>
+                <div className={styles.inputs}>
+                    <input className={styles.input} placeholder='Note title' value={titleValue} onChange={(e) => setTitleValue(e.target.value)} />
+                    <input className={styles.input} placeholder='Note description' value={descriptionValue} onChange={(e) => setDescriptionValue(e.target.value)} />
+                </div>
+                <button className={styles.saveButton} onClick={saveNote}>Save note</button>
+            </div>
+        )
     }
 
-
-    console.log(notes)
-    return (
-        <div className={styles.addForm}>
-            <div className={styles.inputs}>
-                <input className={styles.input} placeholder='Note title' value={titleValue} onChange={(e) => setTitleValue(e.target.value)} />
-                <input className={styles.input} placeholder='Note description' value={descriptionValue} onChange={(e) => setDescriptionValue(e.target.value)} />
-            </div>
-            <button className={styles.saveButton} onClick={saveNote}>Save note</button>
-        </div>
-    )
 }
+
 
 export default AddNote

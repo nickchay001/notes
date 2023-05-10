@@ -2,8 +2,8 @@ import React from "react";
 import styles from "./NoteInfo.module.scss"
 import AddNote from "./AddNote/AddNote";
 
-const NoteInfo = ({ fullFocuseNote, addMode }) => {
-
+const NoteInfo = ({ fullFocuseNote, addMode,editMode }) => {
+    console.log(editMode)
 
     if (!addMode) {
         if (!fullFocuseNote) {
@@ -12,6 +12,13 @@ const NoteInfo = ({ fullFocuseNote, addMode }) => {
                     <h4 className={styles.warning}>Please select a note</h4>
                 </div>
             )
+        } if (editMode) {
+            return (
+                <div className={styles.noteInfo}>
+                    <AddNote fullFocuseNote={fullFocuseNote} />
+                </div>
+            )
+
         } else {
             return (
                 <div className={styles.noteInfo}>
@@ -23,7 +30,7 @@ const NoteInfo = ({ fullFocuseNote, addMode }) => {
     } else {
         return (
             <div className={styles.noteInfo}>
-                <AddNote/>
+                <AddNote />
             </div>
         )
     }
