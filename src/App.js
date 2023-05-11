@@ -26,17 +26,17 @@ function App() {
       description: 'qownjqwnm nqw noqnfnwqeif nqnwf nqefnio poqjfp ojmqopfj po noqnfnwqeif nqnwf nqefnio poqjfp ojmqopfj po'
     },
   ])
+
   const [noteFocuseId, setNoteFocuseId] = useState()
 
-  
+  const [editMode, setEditMode ] = useState(false)
+
+  let [fullFocuseNote, setFullFocuseNote] = useState()
+
   const deleteNote = (id) => {
     setNotes([...notes].filter(n => n.id !== id));
   };
 
-  const [editMode, setEditMode ] = useState(false)
-
-
-  let [fullFocuseNote, setFullFocuseNote] = useState()
 
   useEffect(() => {
     setFullFocuseNote(fullFocuseNote = notes.find(n => n.id === noteFocuseId))
