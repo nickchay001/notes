@@ -1,5 +1,19 @@
 .sideBar{
+    overflow-y: scroll;
+    max-height: 500px;
     background-color: rgb(204, 204, 204);
     border-radius: 5px;
     padding: 10px;
+}
+
+.message{
+    font-weight: 700;
+    font-size: 18px;
+}
+
+@media (max-width:768px){
+    .sideBar{
+        min-height: fit-content;
+        max-height: 300px;
+    }
 }

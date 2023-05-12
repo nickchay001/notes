@@ -3,6 +3,7 @@ import styles from "./Header.module.scss"
 import ButtonDelete from "../Buttons/ButtonDelete/ButtonDelete"
 import ButtonEdit from "../Buttons/ButtonEdit/ButtonEdit"
 import ButtonAdd from "../Buttons/ButtonAdd/ButtonAdd"
+import Search from "./Search/Search"
 
 const Header = () => {
     return (
@@ -12,6 +13,7 @@ const Header = () => {
                 <ButtonDelete/>
                 <ButtonEdit />
             </div>
+            <Search/>
         </header>
     )
 }

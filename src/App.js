@@ -9,39 +9,51 @@ export const AppContext = React.createContext();
 
 
 function App() {
-  const [notes, setNotes] = useState([
-    {
-      id: 1,
-      title: 'first note',
-      description: 'Не записывать задачу с пустыми инпутами'
-    },
-    {
-      id: 2,
-      title: 'second note',
-      description: 'qownjqwnm nqw noqnfnwqeif nqnwf nqefnio poqjfp ojmqopfj po'
-    },
-    {
-      id: 3,
-      title: 'third note',
-      description: 'qownjqwnm nqw noqnfnwqeif nqnwf nqefnio poqjfp ojmqopfj po noqnfnwqeif nqnwf nqefnio poqjfp ojmqopfj po'
-    },
-  ])
+  const [notes, setNotes] = useState([])
+
+  const [searchingNotes, setSearchingNotes] = useState(notes)
 
   const [noteFocuseId, setNoteFocuseId] = useState()
 
-  const [editMode, setEditMode ] = useState(false)
+  const [editMode, setEditMode] = useState(false)
 
   let [fullFocuseNote, setFullFocuseNote] = useState()
 
+  function setDefoultNotes(){
+    setSearchingNotes(notes)
+  }
+  useEffect(()=>{
+    setSearchingNotes(notes)
+  },[notes])
+
   const deleteNote = (id) => {
-    setNotes([...notes].filter(n => n.id !== id));
-  };
+    if (window.confirm("Are you sure you want to delete the note?")) {
+        let filtredNotes = [...notes].filter(note => note.id !== id)
+        setNotes(filtredNotes)
+    }
+  }
+
+  useEffect(() => {
+    let noteOnFocus = notes.find(n => n.id === noteFocuseId)
+    setFullFocuseNote(noteOnFocus)
+  }, [noteFocuseId, notes])
 
 
   useEffect(() => {
-    setFullFocuseNote(fullFocuseNote = notes.find(n => n.id === noteFocuseId))
-  }, [noteFocuseId, notes])
-    
+    document.addEventListener('keydown', detectDeleteKeyDown, true)
+    document.addEventListener('keydown', detectAddKeyDown, true)
+  })
+  const detectDeleteKeyDown = (e) => {
+    if (e.key === "Delete") {
+      deleteNote(noteFocuseId)
+    }
+  }
+  const detectAddKeyDown = (e) => {
+    if (e.key === "+") {
+      setAddMode(true)
+    }
+  }
+
 
 
   const [addMode, setAddMode] = useState(false)
@@ -50,12 +62,16 @@ function App() {
 
   return (
     <div className={styles.wrapper}>
-      <AppContext.Provider value={{fullFocuseNote,setEditMode,setNotes,deleteNote,setNoteFocuseId,noteFocuseId,setAddMode,notes,editMode}}>
-      <Header/>
-      <main className={styles.main}>
-        <SideBar notes={notes}/>
-        <NoteInfo fullFocuseNote={fullFocuseNote} addMode={addMode} editMode={editMode} />
-      </main>
+      <AppContext.Provider value={{
+        fullFocuseNote, setEditMode, setNotes, deleteNote,
+        setNoteFocuseId, noteFocuseId, setAddMode, notes, editMode,
+        searchingNotes, setSearchingNotes,setDefoultNotes
+      }}>
+        <Header />
+        <main className={styles.main}>
+          <SideBar />
+          <NoteInfo fullFocuseNote={fullFocuseNote} addMode={addMode} editMode={editMode} />
+        </main>
       </AppContext.Provider>
     </div>
   );

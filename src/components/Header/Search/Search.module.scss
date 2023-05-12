@@ -1,0 +1,17 @@
+.input{
+    display: flex;
+    width: 200px;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+@media (max-width:425px){
+    .input{
+        width: 150px;
+        padding: 3px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+}

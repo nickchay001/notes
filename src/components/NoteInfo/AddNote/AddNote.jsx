@@ -7,18 +7,24 @@ import styles from './AddNote.module.scss'
 const AddNote = () => {
     let [titleValue, setTitleValue] = useState('')
     let [descriptionValue, setDescriptionValue] = useState('')
-    const { setNotes, notes} = React.useContext(AppContext)
+    const { setNotes, notes } = React.useContext(AppContext)
     const v4Id = uuidv4()
     function saveNote() {
-        setNotes(
-            [...notes, {
-                id: v4Id,
-                title: titleValue,
-                description: descriptionValue
-            }],
-            setTitleValue(''),
-            setDescriptionValue('')
-        )
+        if (titleValue) {
+            setNotes(
+                [...notes, {
+                    id: v4Id,
+                    title: titleValue,
+                    description: descriptionValue
+                }],
+                setTitleValue(''),
+                setDescriptionValue('')
+            )
+        } else if (!titleValue) {
+            return (
+                alert('Please add note title')
+            )
+        }
     }
 
     return (

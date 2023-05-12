@@ -9,3 +9,16 @@
     column-gap: 10px;
     min-height: 300px;
 }
+
+@media (max-width:768px){
+    .main{
+        margin-top: 10px;
+        display:flex;
+        flex-direction: column;
+        row-gap: 10px;
+        min-height: 300px;
+    }
+    .wrapper{
+        margin: 0px 10px;
+    }
+}
